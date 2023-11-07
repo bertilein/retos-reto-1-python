@@ -1,49 +1,22 @@
-"""
-/*
- * Escribe un programa que, dado un número, compruebe y muestre si es primo, fibonacci y par.
- * Ejemplos:
- * - Con el número 2, nos dirá: "2 es primo, fibonacci y es par"
- * - Con el número 7, nos dirá: "7 es primo, no es fibonacci y es impar"
- */
-"""
-import math as m
+def leet_translator(text):
 
-def is_even(number)->bool:
-    return ((number%2)==0)
+    #leet dictionary
+    leet = {"A": "4", "B": "I3", "C": "[", "D": ")", "E": "3", "F": "|=", "G": "&", "H": "#", "I": "1",
+            "J": ",_|", "K": ">|", "L": "1", "M": "/\/\\", "N": " ^/", "O": "0", "P": " |*", "Q": "(_,)",
+            "R": "I2", "S": "5", "T": "7", "U": "(_)", "V": "\/", "W": "\/\/", "X": "><", "Y": "j", "Z": "2",
+            "1": "L", "2": "R", "3": "E", "4": "A", "5": "S", "6": "b", "7": "T", "8": "B", "9": "g", "0": "o"}
 
-def is_prime(number)->bool:
-    
-    upperbound = m.sqrt(number) 
-    i = 2 
-    while ( number % i != 0 ) and (i <= upperbound):
-        i=i+1
-    
-    return i>upperbound
-        
-    
-def is_perfect_square(number)->bool:
-    square = int(m.sqrt(number))
-    return ((square*square) == number )
+    leet_text = ""
+
+    for word in text:
+        if word.upper() in leet.keys():
+            leet_text += leet[word.upper()]
+        else:
+            leet_text += word
+
+    return leet_text
 
 
-def is_fibonacci(number)->bool:
-    return is_perfect_square(5*number*number+4) or is_perfect_square(5*number*number-4)
-
-
-def is_prime_fib_even(number)->str:
-    es_primo     = (' no', '')[is_prime(number)] + ' es primo, '
-    es_fibonacci = (' no', '')[is_fibonacci(number)] + ' es fibonacci, '
-    es_par       = (' es impar ', ' es par')[is_even(number)]
-    
-    return es_primo+es_fibonacci+es_par
-    
-num1 = 2
-num2 = 7
-
-print(num1 , is_prime_fib_even(num1))
-print(num2 , is_prime_fib_even(num2))
-
-# Más Tests :P - del 2 al 19
-for i in range(1,20):
-    print(i , is_prime_fib_even(i))
-    
+print(leet_translator("Leet"))
+print(leet_translator("Lorem ipsum dolor sit amet, consectetur adipiscing elit"))
+print(leet_translator(input("Texto a traducir: ")))
